@@ -1,0 +1,21 @@
+# This is an example of a one-many entity relation. One account can have many receiving addresses.
+# The Account entity has 1 column storing the toAddress.
+# The Transfer entity has 4 columns where "to" refers to the Account.id
+
+type Account @entity {
+  id: ID! #this primary key is set as the toAddress
+  myToAddress: [Transfer] @derivedFrom(field:"to")
+}
+
+type Transfer @entity {
+  id: ID! #this primary key is the block number + the event id
+  amount: BigInt
+  blockNumber: BigInt
+  to: Account! #receiving address
+}
+
+
+
+
+
+
